@@ -1,0 +1,711 @@
+<!doctype html>
+<html>
+<head>
+    <title>Wishle</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+    
+.btn {
+  color: #fff;
+  cursor:pointer;
+  border-radius: 6px;
+  font-size: 16px;
+  text-decoration: none;
+  border:2px solid #eee;
+  font-family: 'IBM Plex Sans',sans-serif;
+  -moz-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  display: inline-block;
+  text-align: center;
+  padding: 0.4rem 0.9rem;
+  margin-bottom: 3px;
+}
+    
+.btn.green{
+    background: #27ae60;
+}
+.btn.green:hover{
+    background: #2ecc71;
+}
+
+.btn.red{
+    background: #e2321d;
+}
+.btn.red:hover{
+    background: #ed7e71;
+}
+
+.btn.grey{
+    background: #abbeb9;
+}
+.btn.grey:hover{
+    background: #c8d4d1;
+}
+
+.btn.blue{
+    background: #4c73c8;
+}
+.btn.blue:hover{
+    background: #7593d4;
+}
+
+.lbutton {
+  margin-top: -10px;
+  font-size: 10px;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  color: black;
+  min-width: 160px;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
+  padding: 2px 4px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+h2{
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}
+
+h3 {
+   font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+
+.table-wrapper{
+    margin: 0 auto;
+    width: 45%;
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    font-size: 18px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #1c3386;
+}
+
+.fl-table tbody tr:hover { 
+    border: 1px solid #1c3386;
+}
+
+.fl-table td a { 
+   display: block; 
+   text-decoration: none;
+}
+
+
+/* Responsive */
+
+@media (max-width: 767px) {
+    .fl-table {
+        display: block;
+        width: 100%;
+    }
+    .table-wrapper:before{
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: white;
+        padding: 0 0 10px;
+    }
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child{
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 18px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tr td {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  height: 67%;
+}
+
+@-webkit-keyframes modalbox {
+  0% {
+    top: -250px; 
+    opacity: 0;
+  }
+  100% {
+    top: 0; 
+    opacity: 1;
+  }
+}
+
+@keyframes modalbox {
+  0% {
+    top: -250px; 
+    opacity: 0;
+  }
+  100% {
+    top: 0; 
+    opacity: 1;
+  }
+}
+
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tab {
+  overflow: hidden;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: #ddd;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+}
+
+/** BEGIN: Non Openmrs CSS **/
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+* {
+	font-family: "Roboto";
+}
+div.container {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-around;
+	margin-top: 30px;
+	border: 1px solid whitesmoke;
+	padding: 21px;
+	border-radius: 4px;
+}
+h4.title {
+	text-align: center;
+	margin-bottom: 45px;
+}
+:root {
+	--omrs-color-ink-lowest-contrast: rgba(47, 60, 85, 0.18);
+	--omrs-color-ink-low-contrast: rgba(60, 60, 67, 0.3);
+	--omrs-color-ink-medium-contrast: rgba(19, 19, 21, 0.6);
+	--omrs-color-interaction: #1e4bd1;
+	--omrs-color-interaction-minus-two: rgba(73, 133, 224, 0.12);
+	--omrs-color-danger: #b50706;
+	--omrs-color-bg-low-contrast: #eff1f2;
+	--omrs-color-ink-high-contrast: #121212;
+	--omrs-color-bg-high-contrast: #ffffff;
+	
+}
+/** END: Non Openmrs CSS **/
+div.omrs-input-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+  width: 80%;
+}
+
+/* Input*/
+.omrs-input-underlined > input,
+.omrs-input-filled > input {
+	border: none;
+	border-bottom: 0.125rem solid var(--omrs-color-ink-medium-contrast);
+	width: 100%;
+	height: 2rem;
+	font-size: 1.0625rem;
+	padding-left: 0.875rem;
+	line-height: 147.6%;
+	padding-top: 0.825rem;
+	padding-bottom: 0.5rem;
+}
+
+.omrs-input-underlined > input:focus,
+.omrs-input-filled > input:focus {
+	outline: none;
+}
+
+.omrs-input-underlined > .omrs-input-label,
+.omrs-input-filled > .omrs-input-label {
+	position: absolute;
+	top: 0.9375rem;
+	left: 0.875rem;
+	line-height: 147.6%;
+	color: var(--omrs-color-ink-medium-contrast);
+	transition: top .2s;
+}
+
+.omrs-input-underlined > svg,
+.omrs-input-filled > svg {
+	position: absolute;
+	top: 0.9375rem;
+	right: 0.875rem;
+	fill: var(--omrs-color-ink-medium-contrast);
+}
+
+.omrs-input-underlined > .omrs-input-helper,
+.omrs-input-filled > .omrs-input-helper {
+	font-size: 0.9375rem;
+	color: var(--omrs-color-ink-medium-contrast);
+	letter-spacing: 0.0275rem;
+	margin: 0.125rem 0.875rem;
+}
+
+.omrs-input-underlined > input:hover,
+.omrs-input-filled > input:hover {
+	background: var(--omrs-color-interaction-minus-two);
+	border-color: var(--omrs-color-ink-high-contrast);
+}
+
+.omrs-input-underlined > input:focus + .omrs-input-label,
+.omrs-input-underlined > input:valid + .omrs-input-label,
+.omrs-input-filled > input:focus + .omrs-input-label,
+.omrs-input-filled > input:valid + .omrs-input-label {
+	top: 0;
+	font-size: 0.9375rem;
+	margin-bottom: 32px;;
+}
+
+.omrs-input-underlined:not(.omrs-input-danger) > input:focus + .omrs-input-label,
+.omrs-input-filled:not(.omrs-input-danger) > input:focus + .omrs-input-label {
+	color: var(--omrs-color-interaction);
+}
+
+.omrs-input-underlined:not(.omrs-input-danger) > input:focus,
+.omrs-input-filled:not(.omrs-input-danger) > input:focus {
+	border-color: var(--omrs-color-interaction);
+}
+
+.omrs-input-underlined:not(.omrs-input-danger) > input:focus ~ svg,
+.omrs-input-filled:not(.omrs-input-danger) > input:focus ~ svg {
+	fill: var(--omrs-color-ink-high-contrast);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to { 
+        transform: rotate(360deg);
+    }
+}
+ 
+
+ @-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to { 
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.load {
+	width: 24px;
+	height: 24px;
+	margin: 110px auto 0;
+	border:solid 2px blue;
+	border-radius: 50%;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	 -webkit-transition: all 0.5s ease-in;
+    -webkit-animation-name:             rotate; 
+    -webkit-animation-duration:         1.0s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+    	
+    	 transition: all 0.5s ease-in;
+    animation-name:             rotate; 
+    animation-duration:         1.0s; 
+    animation-iteration-count:  infinite;
+    animation-timing-function: linear; 
+}
+
+    </style>
+   
+</head>
+
+<body>
+
+<div>
+    <img style="  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 425px; height: 80px;" src="/logo.png"></img>
+</div>
+
+<div style="padding-top: 50px;" class="center"">
+
+    <div>
+    
+    
+    
+    
+        <div id="create_new_modal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                
+                <div>
+
+                    <div class="tab">
+                    <button class="tablinks" onclick="openTab(event, 'Auto')">Automated Import</button>
+                    <button class="tablinks" onclick="openTab(event, 'Manual')">Manual Import</button>
+                    </div>
+
+                    <div id="Auto" class="tabcontent">
+                    <h3>Automated Import</h3>
+
+                        <div style="padding: 30px 10px;">
+                            <form>
+                                <div class="omrs-input-group">
+                                    <label class="omrs-input-underlined">
+                                    <input required>
+                                    <span class="omrs-input-label">URL</span>
+                                        <span class="omrs-input-helper">Full path to the product e.g. https://example.com/product1</span>
+                                    </label>
+                                </div>
+                                <div style="padding-top: 10px;">
+                                    <a onclick="submitNewAuto();" style="float: left;" class="btn green">Submit</a>
+                                </div>
+                            </form>
+                            
+                        </div>
+                    </div>
+
+                    <div id="Manual" class="tabcontent">
+                    <h3>Manual Import</h3>
+
+                        <div style="padding: 30px 10px;">
+                            <form>
+                                <div class="omrs-input-group">
+                                    <label class="omrs-input-underlined">
+                                    <input required id="manual_name" maxlength="256" autocomplete="off">
+                                    <span class="omrs-input-label">Name</span>
+                                        <span class="omrs-input-helper">Display name e.g. 'Chocolate Fountain'</span>
+                                    </label>
+                                </div>
+                                <div class="omrs-input-group">
+                                    <label class="omrs-input-underlined" maxlength="512" >
+                                    <input required id="manual_img" autocomplete="off">
+                                    <span class="omrs-input-label">Image URL</span>
+                                        <span class="omrs-input-helper">Full path to image e.g. https://example.com/image1.png</span>
+                                    </label>
+                                </div>
+                                <div class="omrs-input-group">
+                                    <label class="omrs-input-underlined">
+                                    <input type='number' oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1'); " step="0.01" id="manual_price" maxlength="9" autocomplete="off">
+                                    <span class="omrs-input-label">Price</span>
+                                        <span class="omrs-input-helper">Digit price e.g. 30.99</span>
+                                    </label>
+                                </div>
+                                
+                                <div style="padding-top: 10px;">
+                                    <a onclick="submitNewManual();" style="float: left;" class="btn green">Submit</a>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                
+                </div>
+                
+            </div>
+
+        </div>
+    
+    
+    
+    
+    
+    
+    
+        <div class="table-wrapper">
+        
+            <p>
+                <a href="/" style="float: left;" class="btn grey">↩ Back</a>
+                <a style="float: left;" id="create_new" class="btn green">Add New</a>
+                
+                <div style="float: right" class="dropdown btn grey">
+                    <span>Sort By: (New-Old)</span>
+                    <div class="dropdown-content">
+                        <a href="/"><p>Alphabetical (A-Z)</p></a>
+                        <a href="/"><p>Alphabetical (Z-A)</p></a>
+                        <a href="/"><p>Age (New-Old)</p></a>
+                        <a href="/"><p>Age (Old-New)</p></a>
+                    </div>
+                </div>
+                <a href="/" style="float: right;" class="btn blue">↻ Refresh Prices</a>
+                
+            </p>
+      
+        
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>Buy</th>
+                    <th style="width: 256px">Item</th>
+                    <th>Price</th>
+                    <th>Item Added</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr>
+                    <td><img src="/link_logos/amazon.png"></img></a></td>
+                    
+                    <td style="padding: 10px 20px;">
+                    
+                    <img style="float: left; max-width: 96px;  width: auto; height: 96px;" src="https://m.media-amazon.com/images/I/B1i3u9-Q-KS._CLa%7C2140%2C2000%7CB1UlrUYMEFS.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SX679._SX._UX._SY._UY_.png"></img>
+                    <h3 style="width: 128px; float: right; font-family: Helvetica; height: 80px;">Queen Official Classic Crest Logo Black Long Sleeve T-Shirt</h3></td>
+                    <td><p style="margin-top: -10px; margin-bottom: 0">£36.99</p><p style="margin: 0; padding-top:0; color: green">-£2.01</p><p><a href="/" class="lbutton">View Price History</a></p></td>
+                    
+                    <td>2 months ago</td>
+                    <td>🗑</td>
+                </tr>
+                
+                <tr>
+                    <td><img src="/link_logos/newegg.png"></img></a></td>
+                    
+                    <td style="padding: 10px 20px;">
+                    
+                    <img style="float: left; max-width: 96px; width: auto; height: 96px;" src="https://c1.neweggimages.com/ProductImage/22-184-952-V01.jpg"></img>
+                    <h3 style="width: 128px; float: right; font-family: Helvetica;">Seagate Expansion Portable 5TB External Hard Drive HDD - 2.5 Inch USB 3.0, for Mac and PC with Rescue Services (STKM5000400)</h3></td>
+                    <td><p style="margin-bottom: 0">£36.99</p><p style="margin: 0; padding-top:0; color: green">-£2.01</p><p><a href="/" class="lbutton">View Price History</a></p></td>
+                    
+                    <td>2 months ago</td>
+                    <td>🗑</td>
+                </tr>
+                
+                
+                <tbody>
+            </table>
+        </div>
+        
+        
+
+    </div>
+      
+      
+</div>
+
+
+
+<script>
+
+
+function submitNewManual () {
+
+    var manual_name = String(document.getElementById('manual_name').value)
+    var manual_img = String(document.getElementById('manual_img').value)
+    var manual_price = String(document.getElementById('manual_price').value)
+    if (manual_name == ""){
+        alert("Name field is empty.");
+        return;
+    }
+    if (manual_img == ""){
+        alert("Image URL field is empty.");
+        return;
+    }
+    if (manual_price == ""){
+        alert("Price field is empty.");
+        return;
+    }
+    var url = "/list/{{ data['list'] }}/submit";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        name: manual_name,
+        img: manual_img,
+        price: manual_price
+    }));
+    reply = xhr.status
+    if (reply == 201){
+        window.location.reload();
+    } else {
+        alert(xhr.responseText);
+    }
+
+    }
+
+
+
+
+
+
+
+// Get the modal
+var modal = document.getElementById("create_new_modal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("create_new");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modalbutton
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+function openTab(evt, TabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(TabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+openTab(event, 'Auto')
+
+</script>
+
+
+</body>
+</html>

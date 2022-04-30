@@ -1,0 +1,261 @@
+<!doctype html>
+<html>
+<head>
+    <title>Wishle</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+    
+.btn {
+  color: #fff;
+  border-radius: 6px;
+  font-size: 16px;
+  text-decoration: none;
+  border:2px solid #eee;
+  font-family: 'IBM Plex Sans',sans-serif;
+  -moz-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  display: inline-block;
+  text-align: center;
+  padding: 0.4rem 0.9rem;
+  margin-bottom: 3px;
+}
+    
+.btn.green{
+    background: #27ae60;
+}
+.btn.green:hover{
+    background: #2ecc71;
+}
+
+.btn.red{
+    background: #e2321d;
+}
+.btn.red:hover{
+    background: #ed7e71;
+}
+
+.btn.grey{
+    background: #abbeb9;
+}
+.btn.grey:hover{
+    background: #c8d4d1;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  color: black;
+  min-width: 160px;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
+  padding: 2px 4px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+h2{
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}
+
+/* Table Styles */
+
+.table-wrapper{
+    margin: 0 auto;
+    width: 45%;
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    font-size: 18px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #1c3386;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+
+.fl-table tr:hover { 
+   background: #c9ccd3; 
+}
+
+.fl-table td a { 
+   display: block; 
+   text-decoration: none;
+}
+
+
+/* Responsive */
+
+@media (max-width: 767px) {
+    .fl-table {
+        display: block;
+        width: 100%;
+    }
+    .table-wrapper:before{
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: white;
+        padding: 0 0 10px;
+    }
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child{
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 18px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tbody tr:nth-child(odd) {
+        background: none;
+    }
+    .fl-table tr:nth-child(even) {
+        background: transparent;
+    }
+    .fl-table tr td {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+}
+    </style>
+   
+</head>
+
+<body>
+
+<div>
+    <img style="  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 425px; height: 80px;" src="/logo.png"></img>
+</div>
+
+<div style="padding-top: 50px;" class="center"">
+
+    <div>
+    
+        <div class="table-wrapper">
+        
+        <p>
+            <a style="float: left;" class="btn green">Create List</a>
+            <a style="float: left;" class="btn red">Delete List</a>
+            
+            <div style="float: right" class="dropdown btn grey">
+                <span>Sort By: (New-Old)</span>
+                <div class="dropdown-content">
+                    <a href="/"><p>Alphabetical (A-Z)</p></a>
+                    <a href="/"><p>Alphabetical (Z-A)</p></a>
+                    <a href="/"><p>Age (New-Old)</p></a>
+                    <a href="/"><p>Age (Old-New)</p></a>
+                </div>
+            </div>
+            
+        </p>
+      
+        
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th style="width: 50%">List</th>
+                    <th>Items</th>
+                    <th>Created</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><a href="/list/main">main</a></td>
+                    <td><a href="/list/main">7</a></td>
+                    <td><a href="/list/main">2 months ago</a></td>
+                </tr>
+                <tr>
+                    <td><a href="/list/main">family</a></td>
+                    <td><a href="/list/main">15</a></td>
+                    <td><a href="/list/main">4 months ago</a></td>
+                </tr>
+                <tbody>
+            </table>
+        </div>
+        
+        
+
+    </div>
+      
+      
+</div>
+
+
+
+
+</body>
+</html>
